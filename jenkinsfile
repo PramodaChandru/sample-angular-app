@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker build -t ${DOCKER_USERNAME}/${DOCKER_IMAGE}:${DOCKER_TAG} .
+                        docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} .
                     """
                 }
             }
@@ -66,6 +66,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: '13b0e139-9da6-480e-bd42-d36fbee50cd0', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh """
                             echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password \$DOCKER_PASSWORD
+                            docker tag repairmate_frontend:latest \${DOCKER_USERNAME}/repairmate_frontend:latest
                             docker push \$DOCKER_USERNAME/sample-angular-app:latest
                         """
                     }
