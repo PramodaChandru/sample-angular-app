@@ -66,7 +66,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: '13b0e139-9da6-480e-bd42-d36fbee50cd0', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh """
                             echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password \$DOCKER_PASSWORD
-                            docker push \${DOCKER_USERNAME}/sample-angular-app:latest
+                            docker push \$DOCKER_USERNAME/sample-angular-app:latest
                         """
                     }
                 }
